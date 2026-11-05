@@ -6,6 +6,10 @@ Seleccionas los permisos que declara una app en su `AndroidManifest.xml` y Droid
 
 Proyecto académico de la Maestría en Inteligencia Artificial Aplicada (MIIA), Universidad Icesi, HACK-AI.
 
+| App con permisos de SMS y teléfono → **Malware (96.2%)** | App con permisos comunes → **Benigna (3.7%)** |
+|---|---|
+| ![Resultado malware](docs/demo-malware.png) | ![Resultado benigna](docs/demo-benigna.png) |
+
 **Stack:** Python · scikit-learn · pandas · Flask · Jinja2 · JavaScript
 
 ### Resultados (validación cruzada agrupada, 4 pliegues × 3 repeticiones)
