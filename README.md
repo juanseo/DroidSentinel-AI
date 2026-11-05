@@ -6,6 +6,8 @@ Seleccionas los permisos que declara una app en su `AndroidManifest.xml` y Droid
 
 Proyecto académico de la Maestría en Inteligencia Artificial Aplicada (MIIA), Universidad Icesi, HACK-AI.
 
+> 📊 **Dataset:** [*Dataset malware/beningn permissions Android*](https://www.kaggle.com/datasets/xwolf12/datasetandroidpermissions), de [**Christian Urcuqui**](https://www.kaggle.com/xwolf12) (Kaggle, 2016). Ver [Dataset y créditos](#dataset-y-créditos).
+
 | App con permisos de SMS y teléfono → **Malware (96.2%)** | App con permisos comunes → **Benigna (3.7%)** |
 |---|---|
 | ![Resultado malware](docs/demo-malware.png) | ![Resultado benigna](docs/demo-benigna.png) |
@@ -30,6 +32,18 @@ Otras características:
 - Validación sin fuga de datos: los perfiles de permisos idénticos siempre caen en el mismo pliegue.
 - Limpieza automática de perfiles con etiquetas contradictorias.
 - Cabeceras de seguridad HTTP (CSP, `X-Frame-Options`, `nosniff`) y validación estricta de entradas.
+
+## Dataset y créditos
+
+Este proyecto usa el dataset **[Dataset malware/beningn permissions Android](https://www.kaggle.com/datasets/xwolf12/datasetandroidpermissions)**, creado y publicado por **Christian Urcuqui** ([@xwolf12 en Kaggle](https://www.kaggle.com/xwolf12)) como resultado de su investigación en machine learning y seguridad Android. Cada aplicación se representa como un vector binario de permisos (`1` = usado, `0` = no usado) con la etiqueta `type` (`1` = malware, `0` = benigna).
+
+El archivo `train.csv` de este repositorio procede de esa publicación. Todos los derechos sobre el dataset pertenecen a su autor. El código de este repositorio es independiente del dataset.
+
+Como solicita el autor, si usas este dataset en un trabajo, cita:
+
+> Urcuqui, C., & Navarro, A. (2016, April). Machine learning classifiers for android malware analysis. In *Communications and Computing (COLCOM), 2016 IEEE Colombian Conference on* (pp. 1-6). IEEE.
+
+Agradecimiento especial al profesor Christian Urcuqui, autor del dataset.
 
 ## 1. Requisitos
 

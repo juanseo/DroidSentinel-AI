@@ -79,7 +79,7 @@
     <section class="disclaimer">
       <h3>Limitaciones importantes</h3>
       <p>Este prototipo analiza presencia de permisos, no el comportamiento real ni los accesos realizados en tiempo de ejecución. Un permiso sensible no implica por sí solo que una aplicación sea maliciosa. No subas APKs desconocidos a esta página: el formulario solo recibe nombres de permisos.</p>
-      <p class="small muted">Dataset: {{ metadata.training_rows }} registros usados tras limpieza. Validación: {{ metadata.cross_validation.folds }} pliegues × {{ metadata.cross_validation.repeats }} repeticiones, agrupando perfiles idénticos.</p>
+      <p class="small muted">Dataset: <a href="https://www.kaggle.com/datasets/xwolf12/datasetandroidpermissions" rel="noopener noreferrer">Dataset malware/beningn permissions Android</a>, de Christian Urcuqui (Kaggle, 2016). {{ metadata.training_rows }} registros usados tras limpieza. Validación: {{ metadata.cross_validation.folds }} pliegues × {{ metadata.cross_validation.repeats }} repeticiones, agrupando perfiles idénticos.</p>
     </section>
     <footer>Prototipo académico · No sustituye un análisis antivirus o un sandbox.</footer>
   </main>
