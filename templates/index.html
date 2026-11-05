@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Android Permission Malware Detector</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <p class="eyebrow">CIBERSEGURIDAD · ANDROID</p>
+      <h1>Detector de malware por permisos</h1>
+      <p>Selecciona los permisos declarados por la aplicación para estimar si su perfil se parece al malware de la muestra de entrenamiento.</p>
+      <div class="model-meta">
+        <span>Modelo: <strong>{{ metadata.selected_model }}</strong></span>
+        <span>Umbral: <strong>{{ (metadata.decision_threshold * 100)|round|int }}%</strong></span>
+        <span>Permisos: <strong>{{ permissions|length }}</strong></span>
+      </div>
+    </header>
+
+    {% if error %}
+      <section class="alert error" role="alert">{{ error }}</section>
+    {% endif %}
+
+    {% if result %}
+      <section class="result-card {% if result.prediction == 1 %}malware{% else %}benign{% endif %}" aria-live="polite">
+        <div class="result-top">
+          <div>
+            <p class="eyebrow">RESULTADO DE LA CLASIFICACIÓN</p>
+            <h2>{{ result.label }}</h2>
+          </div>
+          <div class="probability">{{ (result.malware_probability * 100)|round(1) }}%<small>probabilidad estimada de malware</small></div>
+        </div>
+        <div class="meter"><progress max="1" value="{{ result.malware_probability }}" aria-label="Probabilidad estimada de malware"></progress></div>
+        <p class="notice">{{ result.notice }}</p>
+        {% if result.top_selected_permissions %}
+          <h3>Permisos seleccionados con mayor importancia global</h3>
+          <ul class="important-list">
+            {% for item in result.top_selected_permissions %}
+              <li><code>{{ item.permission }}</code><span>{{ (item.importance * 100)|round(2) }}%</span></li>
+            {% endfor %}
+          </ul>
+          <p class="small muted">La importancia es global para el modelo; no demuestra que un permiso concreto haya causado esta predicción.</p>
+        {% endif %}
+      </section>
+    {% endif %}
+
+    <section class="panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Permisos de la aplicación</h2>
+          <p class="muted">Marca los permisos que aparecen en el AndroidManifest de la aplicación.</p>
+        </div>
+        <span class="counter" id="selectedCount">{{ selected|length }} seleccionados</span>
+      </div>
+      <form method="post" action="/">
+        <div class="toolbar">
+          <input id="permissionSearch" type="search" placeholder="Buscar permiso…" aria-label="Buscar permiso">
+          <button type="button" class="button secondary" id="selectVisible">Seleccionar visibles</button>
+          <button type="button" class="button secondary" id="clearAll">Limpiar selección</button>
+        </div>
+        <div class="permission-list" id="permissionList">
+          {% for permission in permissions %}
+            <label class="permission-item" data-permission="{{ permission|lower }}">
+              <input type="checkbox" name="permissions" value="{{ permission }}" {% if permission in selected %}checked{% endif %}>
+              <span>{{ permission }}</span>
+            </label>
+          {% endfor %}
+        </div>
+        <div class="submit-row">
+          <span class="muted small">Los permisos no seleccionados se representan como 0.</span>
+          <button type="submit" class="button primary">Analizar aplicación</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="disclaimer">
+      <h3>Limitaciones importantes</h3>
+      <p>Este prototipo analiza presencia de permisos, no el comportamiento real ni los accesos realizados en tiempo de ejecución. Un permiso sensible no implica por sí solo que una aplicación sea maliciosa. No subas APKs desconocidos a esta página: el formulario solo recibe nombres de permisos.</p>
+      <p class="small muted">Dataset: {{ metadata.training_rows }} registros usados tras limpieza. Validación: {{ metadata.cross_validation.folds }} pliegues × {{ metadata.cross_validation.repeats }} repeticiones, agrupando perfiles idénticos.</p>
+    </section>
+    <footer>Prototipo académico · No sustituye un análisis antivirus o un sandbox.</footer>
+  </main>
+</body>
+</html>

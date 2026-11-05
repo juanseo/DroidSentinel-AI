@@ -1,0 +1,81 @@
+{
+  "original_rows": 398,
+  "training_rows": 377,
+  "permission_columns": 330,
+  "variable_permissions": 92,
+  "constant_permissions": 238,
+  "unique_permission_profiles": 218,
+  "ambiguous_profiles_removed": 3,
+  "ambiguous_rows_removed": 21,
+  "class_counts": {
+    "0": 181,
+    "1": 196
+  },
+  "selected_model": "Gradient Boosting",
+  "selection_metric": "F2 (prioriza recall de malware)",
+  "decision_threshold": 0.5,
+  "cross_validation": {
+    "method": "StratifiedGroupKFold",
+    "folds": 4,
+    "repeats": 3,
+    "grouping": "perfiles de permisos idénticos"
+  },
+  "model_comparison": {
+    "Gradient Boosting": {
+      "accuracy": 0.9336,
+      "precision": 0.9096,
+      "recall": 0.9745,
+      "f1": 0.9396,
+      "f2": 0.9598,
+      "balanced_accuracy": 0.9319,
+      "roc_auc": 0.9756
+    },
+    "Regresión logística": {
+      "accuracy": 0.9319,
+      "precision": 0.9383,
+      "recall": 0.9354,
+      "f1": 0.9346,
+      "f2": 0.9345,
+      "balanced_accuracy": 0.9317,
+      "roc_auc": 0.9752
+    },
+    "SVM RBF": {
+      "accuracy": 0.9248,
+      "precision": 0.9201,
+      "recall": 0.9439,
+      "f1": 0.9296,
+      "f2": 0.9375,
+      "balanced_accuracy": 0.9239,
+      "roc_auc": 0.9812
+    },
+    "Random Forest": {
+      "accuracy": 0.9221,
+      "precision": 0.9334,
+      "recall": 0.9218,
+      "f1": 0.9248,
+      "f2": 0.9223,
+      "balanced_accuracy": 0.9221,
+      "roc_auc": 0.982
+    },
+    "Extra Trees": {
+      "accuracy": 0.9204,
+      "precision": 0.9276,
+      "recall": 0.9235,
+      "f1": 0.923,
+      "f2": 0.9227,
+      "balanced_accuracy": 0.9202,
+      "roc_auc": 0.9822
+    },
+    "Naive Bayes Bernoulli": {
+      "accuracy": 0.9071,
+      "precision": 0.94,
+      "recall": 0.881,
+      "f1": 0.9052,
+      "f2": 0.8897,
+      "balanced_accuracy": 0.9082,
+      "roc_auc": 0.97
+    }
+  },
+  "sklearn_version": "1.8.0",
+  "note": "Métricas de validación cruzada agrupada; no equivalen a una garantía de rendimiento en aplicaciones nuevas o actuales."
+}
